@@ -67,7 +67,7 @@ function registerCommands(context: vscode.ExtensionContext, extensionController:
   context.subscriptions.push(
     vscode.commands.registerCommand(`${ExtensionScheme}.${Commands.Reconnect}`, () => {
       extensionController.reconnect();
-    })
+    }),
   );
 
   context.subscriptions.push(
@@ -77,9 +77,9 @@ function registerCommands(context: vscode.ExtensionContext, extensionController:
       try {
         extensionController.changeActiveSession(vscode.env.sessionId);
       } catch (error) {
-        Logger.error(error);
+        Logger.error(error as Error);
       }
-    })
+    }),
   );
 }
 
@@ -128,7 +128,7 @@ function executeCommand(request: ExecuteCommandMessage) {
     try {
       commandArguments = JSON.parse(request.arguments);
     } catch (error) {
-      Logger.error(error);
+      Logger.error(error as Error);
     }
 
     if (commandArguments) {

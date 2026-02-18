@@ -8,7 +8,11 @@ export class ExtensionHub {
   private _onMessageReceived = new SimpleEventDispatcher<any>();
   private socket!: WebSocket;
 
-  constructor(private host: string, private port: number, private sessionId: string) {}
+  constructor(
+    private host: string,
+    private port: number,
+    private sessionId: string,
+  ) {}
 
   connect() {
     this.socket = new WebSocket(`ws://${this.host}:${this.port}`, {
@@ -34,7 +38,7 @@ export class ExtensionHub {
         JSON.stringify({
           id: message.constructor.name,
           data: JSON.stringify(message),
-        })
+        }),
       );
     }
   }

@@ -19,7 +19,11 @@ export class ExtensionController {
   private status: ExtensionStatus;
   private eventDispatcher: EventList<ExtensionController, any> = new EventList<ExtensionController, any>();
 
-  constructor(statusBar: vscode.StatusBarItem, private sessionId: string, configuration: ExtensionConfiguration) {
+  constructor(
+    statusBar: vscode.StatusBarItem,
+    private sessionId: string,
+    configuration: ExtensionConfiguration,
+  ) {
     this.status = new ExtensionStatus(statusBar);
 
     this.createStreamDeckHub(configuration);
@@ -75,6 +79,8 @@ export class ExtensionController {
     Logger.log("Connected to Stream Deck.");
 
     this.status.setAsConnected();
+
+    this.changeActiveSession(this.sessionId);
   }
 
   private onMessageReceived(message: any) {
@@ -85,7 +91,7 @@ export class ExtensionController {
 
       this.eventDispatcher.get(receivedMessage.id).dispatchAsync(this, JSON.parse(receivedMessage.data));
     } catch (error) {
-      Logger.error(error);
+      Logger.error(error as Error);
     }
   }
 
