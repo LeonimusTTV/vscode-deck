@@ -2,7 +2,7 @@
   "name": "vscode-streamdeck",
   "displayName": "Stream Deck for Visual Studio Code",
   "description": "Enables Stream Deck integration with Visual Studio Code.",
-  "version": "4.1.5",
+  "version": "4.1.7",
   "engines": {
     "vscode": "^1.38.0"
   },
@@ -21,7 +21,7 @@
     "Other"
   ],
   "activationEvents": [
-    "*"
+    "onStartupFinished"
   ],
   "keywords": [
     "streamdeck",
